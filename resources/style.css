@@ -3,6 +3,8 @@ body {
   display: block;
   margin: 0;
   background-color: black;
+  overflow: hidden;
+  height: 100vh;
 }
 canvas {
   display: block;
