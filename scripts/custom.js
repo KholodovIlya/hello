@@ -208,11 +208,11 @@ class GetterSpawner extends GameObject {
     super(0, 0, 0, 0)
   }
   update() {
-    if(etap === 0 && money >= 50) { cost = 300; objects.push(new Getter(216 * 1.5, 216/2, flower2)); etap += 1; }
-    else if(etap === 1 && money >= 300) { cost = 700; objects.push(new Getter(216 * 2.5, 216/2, latter)); etap += 1; }
-    else if(etap === 2 && money >= 700) { cost = 1200; objects.push(new Getter(216 * 3.5, 216/2, shoe)); etap += 1; }
-    else if(etap === 3 && money >= 1200) { cost = 1500; objects.push(new Getter(216 * 4.5, 216/2, cupcake)); etap += 1; }
-    else if(etap === 4 && money >= 1500) { etap += 1; gameOver(); }
+    if(etap === 0 && money >= 50) { cost = 500; objects.push(new Getter(216 * 1.5, 216/2, flower2)); etap += 1; }
+    else if(etap === 1 && money >= 500) { cost = 1000; objects.push(new Getter(216 * 2.5, 216/2, latter)); etap += 1; }
+    else if(etap === 2 && money >= 1000) { cost = 1500; objects.push(new Getter(216 * 3.5, 216/2, shoe)); etap += 1; }
+    else if(etap === 3 && money >= 1500) { cost = 3000; objects.push(new Getter(216 * 4.5, 216/2, cupcake)); etap += 1; }
+    else if(etap === 4 && money >= 3000) { etap += 1; gameOver(); }
   }
 }
 
