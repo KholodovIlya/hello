@@ -22,10 +22,11 @@ const share = new Image();
 share.src = "resources/images/share.png";
 
 let money = 0;
-let timeout = 50;
+let timeout = 30;
 let sockCost = 10;
 let flowerCost = 100;
-let cost = "100";
+let cost = "50";
+let etap = 0;
 
 
 function explosion(x, y) {
@@ -195,24 +196,23 @@ function createProduct() {
   const randX = 100 + float2int(random() * 880);
   const randY = 320 + float2int(random() * 550);
   const randType = float2int(random() * 100);
-  if(randType <= 50) objects.push(new Product(randX, randY, heart, `+${sockCost}`, "blue", sock));
-  else if(randType <= 60) objects.push(new Product(randX, randY, cupcake, "взрыв", "orange", explosion));
-  else if(randType <= 80) objects.push(new Product(randX, randY, flower2, `+${flowerCost}`, "pink", flower));
-  else if(randType <= 90) objects.push(new Product(randX, randY, shoe, "ускорение", "green", timeoutDown));
-  else if(randType <= 100) objects.push(new Product(randX, randY, latter, "всё дороже на 20%", "yellow", multiplierUp));
+  if(randType <= 50 && etap >= 0) objects.push(new Product(randX, randY, heart, `+${sockCost}`, "blue", sock));
+  else if(randType <= 70 && etap >= 1) objects.push(new Product(randX, randY, flower2, `+${flowerCost}`, "pink", flower));
+  else if(randType <= 80 && etap >= 2) objects.push(new Product(randX, randY, latter, "всё дороже на 20%", "yellow", multiplierUp));
+  else if(randType <= 90 && etap >= 3) objects.push(new Product(randX, randY, shoe, "ускорение", "green", timeoutDown));
+  else if(randType <= 100 && etap >= 4) objects.push(new Product(randX, randY, cupcake, "взрыв", "orange", explosion));
 }
 
 class GetterSpawner extends GameObject {
   constructor() {
     super(0, 0, 0, 0)
-    this.etap = 0;
   }
   update() {
-    if(this.etap === 0 && money >= 100) { cost = 500; objects.push(new Getter(216 * 1.5, 216/2, flower2)); this.etap += 1; }
-    else if(this.etap === 1 && money >= 500) { cost = 1500; objects.push(new Getter(216 * 2.5, 216/2, latter)); this.etap += 1; }
-    else if(this.etap === 2 && money >= 1500) { cost = 3000; objects.push(new Getter(216 * 3.5, 216/2, shoe)); this.etap += 1; }
-    else if(this.etap === 3 && money >= 3000) { cost = 10000; objects.push(new Getter(216 * 4.5, 216/2, cupcake)); this.etap += 1; }
-    else if(this.etap === 4 && money >= 10000) { this.etap += 1; gameOver(); }
+    if(etap === 0 && money >= 50) { cost = 300; objects.push(new Getter(216 * 1.5, 216/2, flower2)); etap += 1; }
+    else if(etap === 1 && money >= 300) { cost = 700; objects.push(new Getter(216 * 2.5, 216/2, latter)); etap += 1; }
+    else if(etap === 2 && money >= 700) { cost = 1200; objects.push(new Getter(216 * 3.5, 216/2, shoe)); etap += 1; }
+    else if(etap === 3 && money >= 1200) { cost = 1500; objects.push(new Getter(216 * 4.5, 216/2, cupcake)); etap += 1; }
+    else if(etap === 4 && money >= 1500) { etap += 1; gameOver(); }
   }
 }
 
